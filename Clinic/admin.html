@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>MediCare Plus - Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-header">
+            <div class="logo">MediCare Plus - Admin</div>
+            <button class="hamburger" onclick="toggleMenu()">☰</button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html" onclick="closeMenu()">Back to Website</a>
+        </div>
+    </div>
+
+    <!-- Header for desktop -->
+    <header class="desktop-header">
+        <nav>
+            <div class="logo">MediCare Plus - Admin</div>
+            <div class="nav-links">
+                <a href="index.html">Back to Website</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ADMIN DASHBOARD SECTION (SAME CODE AS INDEX.HTML) -->
+    <section class="admin-dashboard" id="admin" style="padding-top: 6rem;">
+        <div class="section-title">
+            <h2>Admin Dashboard</h2>
+            <p>Manage appointments and patient flow efficiently</p>
+        </div>
+        
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <div class="stat-value">24</div>
+                <div>Today's Appointments</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">3</div>
+                <div>Pending</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">2</div>
+                <div>Cancelled</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">95%</div>
+                <div>Show-up Rate</div>
+            </div>
+        </div>
+        
+        <div class="appointments-list">
+            <h3>Today's Appointments</h3>
+            <div class="appointment-item">
+                <div class="appointment-time">09:00</div>
+                <div class="appointment-details">
+                    <strong>John Doe</strong> - Dr. Smith<br>
+                    <small>Cardiology</small>
+                </div>
+                <span class="appointment-status status-confirmed">✓</span>
+            </div>
+            <div class="appointment-item">
+                <div class="appointment-time">10:30</div>
+                <div class="appointment-details">
+                    <strong>Jane Smith</strong> - Dr. Johnson<br>
+                    <small>Dermatology</small>
+                </div>
+                <span class="appointment-status status-pending">⏳</span>
+            </div>
+            <div class="appointment-item">
+                <div class="appointment-time">14:00</div>
+                <div class="appointment-details">
+                    <strong>Robert Wilson</strong> - Dr. Williams<br>
+                    <small>Pediatric</small>
+                </div>
+                <span class="appointment-status status-confirmed">✓</span>
+            </div>
+        </div>
+        
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>MediCare Plus - Admin</h3>
+                <p>📍 123 Medical Center Dr</p>
+                <p>📞 (555) 123-4567</p>
+                <p>✉️ admin@medicareplus.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="index.html" style="color: white; text-decoration: none;">Back to Main Site</a></p>
+                <p><a href="#" style="color: white; text-decoration: none;">Settings</a></p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024 MediCare Plus - Admin Dashboard</p>
+        </div>
+    </footer>
+</body>
+</html>
