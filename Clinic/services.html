@@ -1,0 +1,153 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+        <title>HealthCare - Services</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+
+        <!-- Mobile Navigation -->
+        <div class="mobile-nav">
+            <div class="mobile-nav-header">
+                <div class="logo">HealthCare</div>
+                <button class="hamburger" onclick="toggleMenu()">☰</button>
+            </div>
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="contact.html">Contact</a>
+                <a href="index.html#appointment">Book Appointment</a>
+                <div class="mobile-menu-buttons">
+                    <button class="btn btn-secondary" onclick="window.location.href='admin.html'">Login</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desktop Header -->
+        <header class="desktop-header">
+            <nav>
+                <div class="logo">HealthCare</div>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="services.html">Services</a>
+                    <a href="contact.html">Contact</a>
+                    <a href="index.html#appointment">Book Appointment</a>
+                </div>
+                <div>
+                    <button class="btn btn-secondary" onclick="showLoginModal()">Login</button>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Login Modal -->
+        <div class="modal-overlay" id="loginModal">
+            <div class="login-modal">
+                <span class="close-btn" onclick="hideLoginModal()">&times;</span>
+                <h2>Login to HealthCare</h2>
+                <p style="color: #666; margin-bottom: 1rem;">Please enter your credentials</p>
+                
+                <div class="login-form">
+                    <label for="username">Username</label>
+                    <input type="text" placeholder="Enter username" id="username">
+                    
+                    <label for="password">Password</label>
+                    <input type="password" placeholder="Enter password" id="password">
+                    
+                    <button class="btn-primary" onclick="handleLogin()">Sign In</button>
+                    
+                    <p style="text-align: center; margin-top: 1rem;">
+                        <a href="#" style="color: #667eea; text-decoration: none;">Forgot password?</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page Header -->
+        <section class="page-header">
+            <h1>Our Services</h1>
+            <p>Comprehensive healthcare services tailored to your needs</p>
+        </section>
+
+        <!-- Services Grid -->
+        <section class="services-grid-section">
+            <div class="services-container">
+                <div class="service-card">
+                    <div class="service-icon">🫀</div>
+                    <h3>Cardiology</h3>
+                    <p>Expert heart care with advanced diagnostic technology.</p>
+                    <ul class="service-features">
+                        <li>✓ Heart consultations</li>
+                        <li>✓ ECG & EKG</li>
+                        <li>✓ Stress tests</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🧠</div>
+                    <h3>Neurology</h3>
+                    <p>Comprehensive care for disorders of the nervous system.</p>
+                    <ul class="service-features">
+                        <li>✓ Neurological exams</li>
+                        <li>✓ Headache management</li>
+                        <li>✓ Memory disorders</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">👶</div>
+                    <h3>Pediatrics</h3>
+                    <p>Specialized healthcare for infants, children, and adolescents.</p>
+                    <ul class="service-features">
+                        <li>✓ Well-child visits</li>
+                        <li>✓ Vaccinations</li>
+                        <li>✓ Developmental screening</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🧴</div>
+                    <h3>Dermatology</h3>
+                    <p>Expert care for skin, hair, and nail conditions.</p>
+                    <ul class="service-features">
+                        <li>✓ Skin cancer screening</li>
+                        <li>✓ Acne treatment</li>
+                        <li>✓ Mole evaluation</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🦷</div>
+                    <h3>Dental Care</h3>
+                    <p>Complete oral health services for the whole family.</p>
+                    <ul class="service-features">
+                        <li>✓ Cleanings & checkups</li>
+                        <li>✓ Fillings & crowns</li>
+                        <li>✓ Emergency care</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">👁️</div>
+                    <h3>Ophthalmology</h3>
+                    <p>Comprehensive eye care and vision services.</p>
+                    <ul class="service-features">
+                        <li>✓ Eye exams</li>
+                        <li>✓ Cataract evaluation</li>
+                        <li>✓ Glaucoma screening</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2>Ready to book an appointment?</h2>
+            <p>Choose your preferred service and schedule a visit today.</p>
+            <a href="index.html#appointment" class="btn btn-primary cta-button">Book Now</a>
+        </section>
+
+        <script src="script.js"></script>
+    </body>
+    </html>

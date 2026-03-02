@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>HealthCare - Contact</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-header">
+            <div class="logo">HealthCare</div>
+            <button class="hamburger" onclick="toggleMenu()">☰</button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact</a>
+            <a href="index.html#appointment">Book Appointment</a>
+            <div class="mobile-menu-buttons">
+                <button class="btn btn-secondary" onclick="window.location.href='admin.html'">Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Desktop Header -->
+    <header class="desktop-header">
+        <nav>
+            <div class="logo">HealthCare</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="contact.html">Contact</a>
+                <a href="index.html#appointment">Book Appointment</a>
+            </div>
+            <div>
+                <button class="btn btn-secondary" onclick="showLoginModal()">Login</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Login Modal -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="login-modal">
+            <span class="close-btn" onclick="hideLoginModal()">&times;</span>
+            <h2>Login to HealthCare</h2>
+            <p style="color: #666; margin-bottom: 1rem;">Please enter your credentials</p>
+            
+            <div class="login-form">
+                <label for="username">Username</label>
+                <input type="text" placeholder="Enter username" id="username">
+                
+                <label for="password">Password</label>
+                <input type="password" placeholder="Enter password" id="password">
+                
+                <button class="btn-primary" onclick="handleLogin()">Sign In</button>
+                
+                <p style="text-align: center; margin-top: 1rem;">
+                    <a href="#" style="color: #667eea; text-decoration: none;">Forgot password?</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Contact Us</h1>
+        <p>We're here to help. Reach out to us anytime.</p>
+    </section>
+
+    <!-- Contact Info Grid -->
+    <section class="contact-info-section">
+        <div class="contact-container">
+            <div class="contact-card">
+                <div class="contact-icon">📍</div>
+                <h3>Visit Us</h3>
+                <p>123 Health Avenue<br>Medical District<br>Manila, Philippines 1000</p>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">📞</div>
+                <h3>Call Us</h3>
+                <p>Main: (02) 8123-4567<br>Emergency: 0917-123-4567<br>24/7 Hotline: 1-800-HEALTH</p>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">✉️</div>
+                <h3>Email Us</h3>
+                <p>General: info@healthcare.com<br>Appointments: bookings@healthcare.com<br>Support: help@healthcare.com</p>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">🕒</div>
+                <h3>Clinic Hours</h3>
+                <p>Monday-Friday: 8:00 AM - 8:00 PM<br>Saturday: 9:00 AM - 5:00 PM<br>Sunday: 10:00 AM - 3:00 PM</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="contact-form-section">
+        <h2>Send Us a Message</h2>
+        <div class="contact-form-container">
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="contact-name">Full Name</label>
+                    <input type="text" id="contact-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact-email">Email Address</label>
+                    <input type="email" id="contact-email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact-subject">Subject</label>
+                    <input type="text" id="contact-subject" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact-message">Message</label>
+                    <textarea id="contact-message" rows="5" required></textarea>
+                </div>
+                
+                <button type="button" class="btn btn-primary" onclick="sendMessage()" style="width: 100%;">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3860.123456789012!2d121.01234567890123!3d14.567890123456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDM0JzA0LjQiTiAxMjHCsDAwJzQ0LjQiRQ!5e0!3m2!1sen!2sph!4v1234567890123" width="100%" height="400" style="border:0; border-radius: 12px;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

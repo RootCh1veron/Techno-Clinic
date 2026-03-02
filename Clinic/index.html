@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>HealthCare</title>
+    <title>HealthCare - Home</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <!-- Mobile Navigation -->
-
     <div class="mobile-nav">
         <div class="mobile-nav-header">
             <div class="logo">HealthCare</div>
             <button class="hamburger" onclick="toggleMenu()">☰</button>
         </div>
         <div class="mobile-menu" id="mobileMenu">
-            <a href="#home" onclick="closeMenu()">Home</a>
+            <a href="#" onclick="showHomeFeatures()">Home</a> 
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact</a>
             <a href="#appointment" onclick="closeMenu()">Book Appointment</a>
             <div class="mobile-menu-buttons">
                 <button class="btn btn-secondary" onclick="window.location.href='admin.html'">Login</button>
@@ -24,15 +25,14 @@
         </div>
     </div>
 
-    <!-- Header for desktop -->
-
+    <!-- Desktop Header -->
     <header class="desktop-header">
         <nav>
             <div class="logo">HealthCare</div>
             <div class="nav-links">
-                <a href="#home">Home</a>
-                <a href="#Service">Service</a>
-                <a href="#Contact">Contact</a>
+                <a href="#" onclick="showHomeFeatures()">Home</a>
+                <a href="services.html">Services</a>
+                <a href="contact.html">Contact</a>
                 <a href="#appointment">Book Appointment</a>
             </div>
             <div>
@@ -41,16 +41,37 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Login Modal -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="login-modal">
+            <span class="close-btn" onclick="hideLoginModal()">&times;</span>
+            <h2>Login to HealthCare</h2>
+            <p style="color: #666; margin-bottom: 1rem;">Please enter your credentials</p>
+            
+            <div class="login-form">
+                <label for="username">Username</label>
+                <input type="text" placeholder="Enter username" id="username">
+                
+                <label for="password">Password</label>
+                <input type="password" placeholder="Enter password" id="password">
+                
+                <button class="btn-primary" onclick="handleLogin()">Sign In</button>
+                
+                <p style="text-align: center; margin-top: 1rem;">
+                    <a href="#" style="color: #667eea; text-decoration: none;">Forgot password?</a>
+                </p>
+            </div>
+        </div>
+    </div>
 
+    <!-- Hero Section -->
     <section class="hero" id="home">
-        <h1 class="Name-1">Welcome to HealthCare</h1>
-        <p class="Name-2">Your Health, Our Priority - Book appointments online, manage your health records, and more.</p>
+        <h1>Welcome to HealthCare</h1>
+        <p>Your Health, Our Priority - Book appointments online, manage your health records, and more.</p>
         <button class="btn btn-primary" onclick="scrollToAppointment()">Book Appointment Now</button>
     </section>
 
     <!-- Features Section -->
-
     <section class="features" id="features">
         <div class="section-title">
             <h2>Why Choose HealthCare?</h2>
@@ -63,8 +84,8 @@
             </div>
             <div class="feature-card">
                 <div class="feature-icon">💰</div>
-                    <h3>Secure Payments</h3>
-                    <p>Pay deposits online to secure your appointment</p>
+                <h3>Secure Payments</h3>
+                <p>Pay deposits online to secure your appointment</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">⏰</div>
@@ -80,58 +101,93 @@
     </section>
   
     <!-- Appointment Booking System -->
-
-    <div class="section-title">
+    <section id="appointment">
+        <div class="section-title">
             <h2>Book Your Appointment</h2>
-            <p>Secure your slot with a 20% down payment</p>
+            <p>Schedule your visit in seconds</p>
         </div>
+
         <div class="booking-container">
             <div class="booking-form">
-                <h3>Appointment Details</h3>
-                <form id="appointmentForum">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" required>
-                    </div>  
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" required>
+                <h3>Secure & Easy Booking</h3>
+                <p>Three simple steps: verify your email with OTP, pay your down payment through GCash or Maya, and receive your instant reference number.</p>
+                
+                <div class="calendar-section">
+                    <h4>Select Date & Time</h4>
+                    
+                    <!-- Month Navigation -->
+                    <div class="month-navigation">
+                        <button class="month-nav-btn" onclick="changeMonth(-1)">←</button>
+                        <span class="month-year" id="displayMonthYear">March 2026</span>
+                        <button class="month-nav-btn" onclick="changeMonth(1)">→</button>
                     </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" required>
+                    
+                    <!-- Calendar Header -->
+                    <div class="calendar-header">
+                        <div>Sun</div>
+                        <div>Mon</div>
+                        <div>Tue</div>
+                        <div>Wed</div>
+                        <div>Thu</div>
+                        <div>Fri</div>
+                        <div>Sat</div>
                     </div>
-                    <div class="form-group">
-                        <label for="doctor">Select Doctor</label>
-                        <select id="doctor" required>
-                            <option value="">Choose a doctor</option>
-                            <option value="dr-smith">Dr. Sarah Smith (Cardiologist)</option>
-                            <option value="dr-johnson">Dr. Michael Johnson (Dermatologist)</option>
-                            <option value="dr-williams">Dr. Emily Williams (Pediatrician)</option>
-                            <option value="dr-brown">Dr. James Brown (Neurologist)</option>
-                        </select>
+                    
+                    <!-- Calendar Grid -->
+                    <div class="calendar-grid" id="calendarGrid"></div>
+                    
+                    <!-- Selected Date Display -->
+                    <div class="selected-date" id="selectedDateDisplay">
+                        Selected: March 20, 2026
                     </div>
-
-
-    <!-- Login Modal -->
-
-    <div class="modal" id="loginModal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('loginModal')">&times;</span>
-            <h2>Login</h2>
-            <form onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label for="login-email">Email</label>
-                    <input type="email" id="login-email" required>
+                    
+                    <!-- Time Slots -->
+                    <div class="time-slots-section">
+                        <h5>Available Time Slots</h5>
+                        <div class="time-slots-grid" id="timeSlots"></div>
+                    </div>
+                    
+                    <!-- Patient Details Form -->
+                    <div id="patientDetailsForm" style="display: none;">
+                        <h4>Patient Details</h4>
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" required>
+                        </div>  
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="doctor">Select Doctor</label>
+                            <select id="doctor" required>
+                                <option value="">Choose a doctor</option>
+                                <option value="Dr. Sarah Smith">Dr. Sarah Smith (Cardiologist)</option>
+                                <option value="Dr. Michael Johnson">Dr. Michael Johnson (Dermatologist)</option>
+                                <option value="Dr. Emily Williams">Dr. Emily Williams (Pediatrician)</option>
+                                <option value="Dr. James Brown">Dr. James Brown (Neurologist)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Continue Button -->
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary continue-btn" onclick="continueToDetails()">Continue to Booking Details →</button>
+                    </div>
+                    
+                    <!-- Confirm Button -->
+                    <div class="form-group" id="confirmButton" style="display: none;">
+                        <button type="button" class="btn btn-primary" onclick="confirmBooking()">Confirm Booking</button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="login-password">Password</label>
-                    <input type="password" id="login-password" required>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;" onclick="window.location.href='admin.html'">Login</button>
-            </form>
+            </div>
         </div>
-    </div>
-    
+    </section>
+
+    <script src="script.js"></script>
 </body>
 </html>
