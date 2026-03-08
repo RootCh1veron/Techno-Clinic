@@ -844,3 +844,47 @@
         border-color: #2c3e50;
         transform: none;
     }
+
+        /* Payment Styles */
+    .payment-summary {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+    }
+
+    .payment-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .payment-row:last-child {
+        border-bottom: none;
+        font-weight: bold;
+    }
+
+    .down-payment-amount {
+        color: #4CAF50;
+        font-size: 1.2rem;
+    }
+
+    .payment-success {
+        text-align: center;
+        padding: 2rem;
+        background: #d4edda;
+        color: #155724;
+        border-radius: 8px;
+        margin-top: 1rem;
+    }
+
+    .reference-number {
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding: 0.5rem;
+        background: white;
+        border-radius: 4px;
+        display: inline-block;
+        margin-top: 1rem;
+    }

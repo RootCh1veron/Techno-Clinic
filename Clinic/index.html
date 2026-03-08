@@ -15,12 +15,12 @@
             <button class="hamburger" onclick="toggleMenu()">☰</button>
         </div>
         <div class="mobile-menu" id="mobileMenu">
-            <a href="#" onclick="showHomeFeatures()">Home</a> 
+            <a href="#" onclick="showHomeFeatures(); return false;">Home</a>
             <a href="services.html">Services</a>
             <a href="contact.html">Contact</a>
             <a href="#appointment" onclick="closeMenu()">Book Appointment</a>
             <div class="mobile-menu-buttons">
-                <button class="btn btn-secondary" onclick="window.location.href='admin.html'">Login</button>
+                <button class="btn btn-secondary" onclick="window.location.href='admin.html'">Admin</button>
             </div>
         </div>
     </div>
@@ -30,13 +30,13 @@
         <nav>
             <div class="logo">HealthCare</div>
             <div class="nav-links">
-                <a href="#" onclick="showHomeFeatures()">Home</a>
+                <a href="#" onclick="showHomeFeatures(); return false;">Home</a>
                 <a href="services.html">Services</a>
                 <a href="contact.html">Contact</a>
                 <a href="#appointment">Book Appointment</a>
             </div>
             <div>
-                <button class="btn btn-secondary" onclick="showLoginModal()">Login</button>
+                <button class="btn btn-secondary" onclick="showLoginModal()">Admin Login</button>
             </div>
         </nav>
     </header>
@@ -45,8 +45,8 @@
     <div class="modal-overlay" id="loginModal">
         <div class="login-modal">
             <span class="close-btn" onclick="hideLoginModal()">&times;</span>
-            <h2>Login to HealthCare</h2>
-            <p style="color: #666; margin-bottom: 1rem;">Please enter your credentials</p>
+            <h2>Admin Login</h2>
+            <p style="color: #666; margin-bottom: 1rem;">Enter credentials to access admin panel</p>
             
             <div class="login-form">
                 <label for="username">Username</label>
@@ -110,7 +110,7 @@
         <div class="booking-container">
             <div class="booking-form">
                 <h3>Secure & Easy Booking</h3>
-                <p>Three simple steps: verify your email with OTP, pay your down payment through GCash or Maya, and receive your instant reference number.</p>
+                <p>Three simple steps: select date/time, enter details, upload receipt, and confirm.</p>
                 
                 <div class="calendar-section">
                     <h4>Select Date & Time</h4>
@@ -138,7 +138,7 @@
                     
                     <!-- Selected Date Display -->
                     <div class="selected-date" id="selectedDateDisplay">
-                        Selected: March 20, 2026
+                        Select a date above
                     </div>
                     
                     <!-- Time Slots -->
@@ -174,6 +174,73 @@
                         </div>
                     </div>
                     
+                    <!-- ===== NEW PAYMENT SECTION WITH UPLOAD ===== -->
+                    <div id="paymentSection" style="display: none;">
+                        <h4>Payment Details</h4>
+                        <p>Upload your payment receipt (GCash/Maya screenshot) for verification.</p>
+                        
+                        <!-- Form sends data to process_booking.php -->
+                        <form id="paymentForm" action="process_booking.php" method="POST" enctype="multipart/form-data">
+                            
+                            <!-- Hidden fields to pass data from JavaScript -->
+                            <input type="hidden" name="refNumber" id="hiddenRefNumber">
+                            <input type="hidden" name="date" id="hiddenDate">
+                            <input type="hidden" name="time" id="hiddenTime">
+                            <input type="hidden" name="doctor" id="hiddenDoctor">
+                            <input type="hidden" name="patientName" id="hiddenName">
+                            <input type="hidden" name="patientEmail" id="hiddenEmail">
+                            <input type="hidden" name="patientPhone" id="hiddenPhone">
+                            
+                            <div class="payment-summary">
+                                <div class="payment-row">
+                                    <span>Down Payment (20%):</span>
+                                    <span class="down-payment-amount">₱100.00</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="paymentMethod">Select Payment Method</label>
+                                <select name="paymentMethod" id="paymentMethod" required>
+                                    <option value="">Choose payment method</option>
+                                    <option value="GCash">GCash</option>
+                                    <option value="Maya">Maya</option>
+                                    <option value="Bank Transfer">Bank Transfer</option>
+                                </select>
+                            </div>
+                            
+                            <!-- RECEIPT UPLOAD FIELD -->
+                            <div class="form-group">
+                                <label for="receipt">Upload Payment Receipt (Screenshot)</label>
+                                <input type="file" name="receipt" id="receipt" accept="image/*" required>
+                                <small style="display: block; color: #666; margin-top: 5px;">Max 2MB. JPG or PNG only.</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="termsCheckbox" required> I agree to the terms and conditions
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Confirm Booking & Upload Receipt</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Continue Button -->
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary continue-btn" onclick="continueToDetails()">Continue to Booking Details →</button>
+                    </div>
+                    
+                    <!-- Proceed to Payment Button -->
+                    <div class="form-group" id="proceedToPaymentBtn" style="display: none;">
+                        <button type="button" class="btn btn-primary" onclick="showPaymentSection()" style="width: 100%;">Proceed to Payment →</button>
+                    </div>
+                    
+                    <!-- REMOVED the old confirmButton - it's gone now -->
+                </div>
+            </div>
+        </div>
+    </section>
+                        
                     <!-- Continue Button -->
                     <div class="form-group">
                         <button type="button" class="btn btn-primary continue-btn" onclick="continueToDetails()">Continue to Booking Details →</button>
@@ -187,6 +254,11 @@
             </div>
         </div>
     </section>
+
+    <!-- Emergency Unlock Button (Hidden by default, for debugging) -->
+    <div style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
+        <button onclick="emergencyUnlockAll()" style="background: #dc3545; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; display: none;">🔓 Emergency Unlock</button>
+    </div>
 
     <script src="script.js"></script>
 </body>

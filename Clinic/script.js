@@ -190,74 +190,23 @@
         document.getElementById('confirmButton').style.display = 'block';
     }
 
-    // Confirm booking
-    function confirmBooking() {
-        let name = document.getElementById('name')?.value || '';
-        let email = document.getElementById('email')?.value || '';
-        let phone = document.getElementById('phone')?.value || '';
-        let doctor = document.getElementById('doctor')?.value || '';
-        
-        if (!name || !email || !phone || !doctor) {
-            alert('❌ Please fill in all patient details');
-            return;
-        }
-        
-        if (!selectedDate || !selectedTime) {
-            alert('❌ Please select date and time');
-            return;
-        }
+    function continueToDetails() {
+        if (!selectedDate) { alert('Please select a date'); return; }
+        if (!selectedTime) { alert('Please select a time slot'); return; }
         
         let year = selectedDate.getFullYear();
         let month = selectedDate.getMonth();
         let day = selectedDate.getDate();
-        let dateString = year + '-' + String(month + 1).padStart(2, '0') + '-' + String(day).padStart(2, '0');
         
         if (isDateLocked(year, month, day)) {
-            alert('❌ This date is already LOCKED!');
+            alert('❌ This date just got LOCKED by someone else.');
             renderCalendar();
             return;
         }
         
-        let monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        let formattedDate = monthNames[month] + ' ' + day + ', ' + year;
-        let refNumber = generateReferenceNumber();
-        
-        let appointment = {
-            referenceNumber: refNumber,
-            date: dateString,
-            formattedDate: formattedDate,
-            time: selectedTime,
-            doctor: doctor,
-            patientName: name,
-            patientEmail: email,
-            patientPhone: phone,
-            bookedAt: new Date().toISOString(),
-            status: 'locked'
-        };
-        
-        let appointments = getAppointments();
-        appointments.push(appointment);
-        localStorage.setItem('appointments', JSON.stringify(appointments));
-        
-        lockDate(dateString, name, `Appointment with ${doctor}`);
-        
-        alert('🔒 APPOINTMENT CONFIRMED & DATE LOCKED!\n\n' +
-            'Reference: ' + refNumber + '\n' +
-            'Date: ' + formattedDate + '\n' +
-            'Time: ' + selectedTime + '\n' +
-            'Doctor: ' + doctor + '\n' +
-            'Patient: ' + name + '\n\n' +
-            '✅ This date is now LOCKED.\n' +
-            '🔓 Only ADMIN can unlock it.');
-        
-        renderCalendar();
-        
-        document.getElementById('patientDetailsForm').style.display = 'none';
-        document.querySelector('.continue-btn').style.display = 'block';
-        document.getElementById('confirmButton').style.display = 'none';
-        document.getElementById('appointmentForum')?.reset();
-        selectedDate = null;
-        selectedTime = null;
+        document.getElementById('patientDetailsForm').style.display = 'block';
+        document.querySelector('.continue-btn').style.display = 'none';
+        document.getElementById('proceedToPaymentBtn').style.display = 'block'; // Show proceed button
     }
 
     // Admin functions
@@ -324,3 +273,63 @@
         else { alert('❌ Fill all fields'); }
     }
     function showHomeFeatures() { document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' }); closeMenu(); return false; }
+
+        // EMERGENCY UNLOCK - Clears ALL locked dates
+    function emergencyUnlockAll() {
+        if (confirm('⚠️ UNLOCK ALL DATES? This will make all dates available again!')) {
+            localStorage.setItem('lockedDates', JSON.stringify([]));
+            localStorage.setItem('appointments', JSON.stringify([]));
+            alert('✅ ALL DATES UNLOCKED! Refresh the page.');
+            if (document.getElementById('calendarGrid')) {
+                renderCalendar();
+            }
+        }
+    }
+
+        // ===== NEW FUNCTIONS FOR PAYMENT + DATABASE =====
+
+    // Show payment section
+    function showPaymentSection() {
+        // Get all the values
+        let name = document.getElementById('name').value;
+        let email = document.getElementById('email').value;
+        let phone = document.getElementById('phone').value;
+        let doctor = document.getElementById('doctor').value;
+        
+        // Validate one more time
+        if (!name || !email || !phone || !doctor) {
+            alert('❌ Please fill in all patient details');
+            return;
+        }
+        
+        // Format date for database
+        let year = selectedDate.getFullYear();
+        let month = String(selectedDate.getMonth() + 1).padStart(2, '0');
+        let day = String(selectedDate.getDate()).padStart(2, '0');
+        let dateString = `${year}-${month}-${day}`;
+        
+        // Generate reference number
+        let refNumber = 'HC-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
+        
+        // Fill hidden fields in the payment form
+        document.getElementById('hiddenRefNumber').value = refNumber;
+        document.getElementById('hiddenDate').value = dateString;
+        document.getElementById('hiddenTime').value = selectedTime;
+        document.getElementById('hiddenDoctor').value = doctor;
+        document.getElementById('hiddenName').value = name;
+        document.getElementById('hiddenEmail').value = email;
+        document.getElementById('hiddenPhone').value = phone;
+        
+        // Show payment section, hide proceed button
+        document.getElementById('paymentSection').style.display = 'block';
+        document.getElementById('proceedToPaymentBtn').style.display = 'none';
+    }
+
+    // Optional: Add file size validation
+    document.getElementById('receipt')?.addEventListener('change', function() {
+        let file = this.files[0];
+        if (file && file.size > 2 * 1024 * 1024) {
+            alert('❌ File is too large! Maximum size is 2MB.');
+            this.value = ''; // Clear the file input
+            }
+    });
